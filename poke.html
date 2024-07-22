@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <style>
+      #poke-nav {
+        display: inline-block;
+        height: 400px; /*affects the height of the block surrounding the prompt, names and button */
+        margin-right: 50px; /* affects how far away the border line in #poke-info is from everything else */
+        width: 550px; /* affects how long the list of names can stretch out */
+        /* border: 5px solid rgb(24, 23, 23); */
+      }
+      #poke-info {
+        border: 5px solid rgb(18, 18, 18);
+        display: inline-block; /*block = boxed border under nav border; inline = smaller line on the side; inline-block = longer line about same length as nav border, but an inch or so above it */
+        height: 400px; /*affects how far away everything except the border (line) is from the header */
+        margin-right: 50px;
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <h1>Pokemon API Fun Times</h1>
+      <div>
+        <span id="poke-nav">
+          <label>Select a Pokemon</label>
+          <div id="pokemon-img-container"></div> <!-- all of the names -->
+          <button>Load More</button>
+        </span>
+        <span id="poke-info">
+
+        </span>
+      </div>
+    </header>
+    <script>
+      let currentOffset = 20; //names change only when this number is changed
+      let currentLimit = 10; //number of generated names
+      let currentPokemon = [];
+
+      const bulba = {
+       "sprites": {
+          "back_default": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/back/1.png",
+          "back_female": null,
+          "back_shiny": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/back/shiny/1.png",
+          "back_shiny_female": null,
+          "front_default": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/1.png",
+          "front_female": null,
+          "front_shiny": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/shiny/1.png",
+        }
+      }
+
+      /**
+       * data -> some kind of array of pokemon objects=
+       */
+
+       function displayPokemonImages(data) {
+        let newSpriteHTML = '';
+        for(let i=0;i<data.length;i++) {
+          const poke = data[i];
+          const htmlPokeSpriteTemplate = `
+          <img src="${poke.sprites.front_default}" /> //look up dot whatever-the-heck
+          `;
+          newSpriteHTML += htmlPokeSpriteTemplate;
+        }
+        const pokeContainer = document.getElementById("pokemon-img-container");
+        pokeContainer.innerHTML = newSpriteHTML;
+      }
+
+      function displayPokemonNames(data) {
+        let newSpriteHTML = '';
+        for(let i=0;i<data.length;i++) {
+          const poke = data[i];
+          const htmlPokeSpriteTemplate = `
+          <span style="padding: 10px">${poke.name}</span>
+          `;
+          newSpriteHTML += htmlPokeSpriteTemplate;
+        }
+        const pokeContainer = document.getElementById("pokemon-img-container");
+        pokeContainer.innerHTML = newSpriteHTML;
+      }
+
+
+
+      function handlePokemonData(data) {
+        for(const poke of data.results) {
+          currentPokemon.push(poke);
+        }
+        displayPokemonNames(currentPokemon);
+      }
+
+      function handleResponse(response) {
+        return response.json();
+      }
+
+      function loadPokemon() {
+        const pokeUrl = "https://pokeapi.co/api/v2/pokemon?offset=" + currentOffset + "&limit=" + currentLimit;
+        fetch(pokeUrl)
+        .then(handleResponse)
+        .then(handlePokemonData);
+
+        const listOfPokemon = [bulba];
+        displayPokemonImages(listOfPokemon);
+      }
+
+      function load() {
+        loadPokemon();
+      }
+
+      window.onload = load;
+    </script>
+  </body>
+</html>

@@ -1,0 +1,15 @@
+
+    let grade = 70.01
+    let isPassing = false;
+    if (grade > 60)
+    {
+      isPassing = true;
+    }
+    // Works the same for strings.
+    return
+    (
+        <div className="App">
+            { isPassing ? <>TRUE</>: <>FALSE</>}
+            {/* If isPassing is true, print TRUE. If not, print FALSE. */}
+        </div>
+    )
