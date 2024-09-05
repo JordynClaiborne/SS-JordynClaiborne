@@ -1,10 +1,11 @@
+import './idolTable.css';
 import React, { useState } from 'react';
 
 
 export function IdolTable() {
    const [tableData, setTableData] = useState([
      { id: 1, picture: 'chan-square-pic.png', name: 'Bang Chan', age: 27 },
-     { id: 2, picture: '/han.png', name: 'HAN', age: 24 }
+     { id: 2, picture: './han.png', name: 'HAN', age: 24 }
    ]);
  const changes = (id, field, value) => {
    setTableData(prevData =>
