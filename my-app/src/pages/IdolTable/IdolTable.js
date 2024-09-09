@@ -4,8 +4,8 @@ import React, { useState } from 'react';
 
 export function IdolTable() {
    const [tableData, setTableData] = useState([
-     { id: 1, picture: 'chan-square-pic.png', name: 'Bang Chan', age: 27 },
-     { id: 2, picture: './han.png', name: 'HAN', age: 24 }
+     { id: 1, picture: './chan-square-pic (1).png', name: 'Bang Chan', age: 27 },
+     { id: 2, picture: './han-square-pic.png', name: 'HAN', age: 24 }
    ]);
  const changes = (id, field, value) => {
    setTableData(prevData =>
@@ -15,7 +15,7 @@ export function IdolTable() {
    );
  };
  return (
-   <div>
+   <div class="tidol">
      <h1>K-Pop Idol Page</h1>
      <table>
        <thead>

@@ -1,3 +1,18 @@
 h1 {
-    color: red;
+    color: black;
+    /* text-align: center; */
+    /* display: flex; */
+    /* border: solid 1px black; */
+}
+html {
+    background-color: rgb(192, 229, 255);
+}
+.tidol {
+    /* margin: 0;
+    padding: 0; */
+    display: grid;
+    justify-items: center;
+}
+table {
+    
 }
