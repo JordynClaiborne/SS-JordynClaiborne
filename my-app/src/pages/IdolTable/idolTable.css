@@ -13,6 +13,19 @@ html {
     display: grid;
     justify-items: center;
 }
-table {
-    
+.submitform {
+    display: grid;
+    justify-items: center;
+}
+button {
+    min-width: 200px;
+    min-height: 100px;
+}
+.submitboxes {
+    display: flex;
+    flex-direction: column;
+}
+.type.file {
+    display: flex;
+    align-content: flex-start;
 }
