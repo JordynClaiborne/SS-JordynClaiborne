@@ -4,8 +4,8 @@ import React, { useState } from 'react';
 
 export function IdolTable() {
    const [tableData, setTableData] = useState([
-     { id: 1, picture: './chan-square-pic (1).png', name: 'Bang Chan', age: 27 },
-     { id: 2, picture: './han-square-pic.png', name: 'HAN', age: 24 }
+     { id: 1, picture: 'chan.png', name: 'Bang Chan', age: 27 },
+     { id: 2, picture: 'han-square-pic.png', name: 'HAN', age: 24 }
    ]);
  const changes = (id, field, value) => {
    setTableData(prevData =>
@@ -14,6 +14,15 @@ export function IdolTable() {
      )
    );
  };
+const fetchMessage = async() => {
+    try {
+        const response = await fetch('/api/items');
+        const data = await response.json();
+        console.log(data);
+     }catch(error) {
+        console.error(error);
+     }
+}; fetchMessage()
  return (
    <div class="tidol">
      <h1>K-Pop Idol Page</h1>
@@ -46,11 +55,25 @@ export function IdolTable() {
                  value={row.age}
                  onChange={(e) => changes(row.id, 'age', e.target.value)}
                />
-             </td>
+            </td>
            </tr>
          ))}
+         
        </tbody>
+       
      </table>
+    <form className="submitform">
+        <label>
+            <h2>Submit A K-Pop Idol!</h2>
+        </label>
+        <div className="submitboxes">
+            <input type="file"/><br/>
+            <input placeholder="Name goes here!"/><br/>
+            <input placeholder="Age goes here!"/><br/>
+        </div>
+        <button>Submit</button> 
+        {/* Put onClick from submit button! */}
+    </form>
    </div>
  );
 };
